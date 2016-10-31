@@ -24,7 +24,7 @@
    //$rec['STATUS']=(int)$status;
   //updating 'SCRIPT_ID' (select)
    global $script_id;
-   $rec['SCRIPT_ID']=$script_id;
+   $rec['SCRIPT_ID']=(int)$script_id;
   //updating 'CODE' (text)
    global $code;
    $rec['CODE']=$code;
