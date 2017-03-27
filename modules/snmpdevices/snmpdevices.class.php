@@ -322,6 +322,7 @@ function usual(&$out) {
   $rec=SQLSelectOne("SELECT * FROM snmpdevices WHERE ID='$id'");
   // some action for related tables
   @unlink(ROOT.'./cms/snmpdevices/'.$rec['MIB_FILE']);
+  SQLExec("DELETE FROM snmpproperties WHERE DEVICE_ID='".$rec['ID']."'");
   SQLExec("DELETE FROM snmpdevices WHERE ID='".$rec['ID']."'");
  }
 /**

@@ -7,6 +7,24 @@
   }
   $table_name='snmpdevices';
   $rec=SQLSelectOne("SELECT * FROM $table_name WHERE ID='$id'");
+
+  if ($this->mode=='copy') {
+   //copy record
+   $rec2=$rec;
+   unset($rec2['ID']);
+   $rec2['TITLE'].=' (copy)';
+   $rec2['ID']=SQLInsert('snmpdevices', $rec2);
+   //copy properties
+   $properties=SQLSelect("SELECT * FROM snmpproperties WHERE DEVICE_ID='".$rec['ID']."'");
+   $total=count($properties);
+   for($i=0;$i<$total;$i++) {
+    unset($properties[$i]['ID']);
+    $properties[$i]['DEVICE_ID']=$rec2['ID'];
+    SQLInsert('snmpproperties', $properties[$i]);
+   }
+   $this->redirect("?view_mode=".$this->view_mode."&id=".$rec2['ID']);
+  }
+
   if ($this->mode=='update') {
    $ok=1;
   //updating 'TITLE' (varchar, required)
