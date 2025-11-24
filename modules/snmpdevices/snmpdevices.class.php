@@ -19,7 +19,7 @@ class snmpdevices extends module {
 *
 * @access private
 */
-function snmpdevices() {
+function __construct() {
   $this->name="snmpdevices";
   $this->title="<#LANG_MODULE_SNMP#>";
   $this->module_category="<#LANG_SECTION_DEVICES#>";
